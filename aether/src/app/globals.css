@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+body {
+  background-color: #F3EEEA;
+}
+
+.roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+.story-write-text {
+  border-right: 5px solid;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 2s , cursor .4s step-end infinite alternate
+}
+
+@keyframes cursor {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+
+.animate-ease {
+  @apply transition transform duration-700 ease-in-out
+}

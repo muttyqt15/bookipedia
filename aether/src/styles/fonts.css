@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300&family=Milonga&family=Modak&family=Montserrat:wght@500&family=Poppins&family=Sniglet&family=Titan+One&display=swap');
+
+.montserrat {
+font-family: 'Montserrat', sans-serif;
+}
+
+.milonga {
+    font-family: 'Milonga', cursive;
+}
+.modak {
+    font-family: 'Modak', cursive;
+}
+
+.titan {
+    font-family: 'Titan One', cursive;
+}
+
+.sniglet {
+    font-family: 'Sniglet', cursive;
+}
+
+.merienda {
+    font-family: 'Merienda', cursive;
+}
+
+.poppins {
+    font-family: 'Poppins', sans-serif;
+}
