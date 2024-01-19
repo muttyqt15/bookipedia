@@ -16,10 +16,7 @@ app.use(morgan("dev"));
 app.use(express.json()); // Important to parse the body of the request
 app.use(cookieParser());
 app.use(
-  cors({
-    origin: "http://localhost:3000", // Allow requests from this origin
-    credentials: true, // Enable credentials (cookies, HTTP authentication) in cross-origin requests
-  })
+  cors()
 );
 
 
