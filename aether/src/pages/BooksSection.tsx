@@ -1,6 +1,6 @@
 "use client"
 import Card from "@/components/elements/Card";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useBooksData from "../hooks/useBooksData";
 import { Book } from "@/types/posts";
 
