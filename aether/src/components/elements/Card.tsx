@@ -21,7 +21,7 @@ const Card = ({ id, title, description, image, author }: CardProps) => {
     if (userJSON.id === author.id) {
       setUserOwns(true);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const router = useRouter();
 
   const handleDelete = async (e: React.MouseEvent<HTMLElement>) => {

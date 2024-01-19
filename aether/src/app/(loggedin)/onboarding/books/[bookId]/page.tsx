@@ -12,16 +12,16 @@ interface Book {
   createdById: string;
 }
 
-export async function generateStaticParams() {
-  const books: Book[] = await getAllBooks();
-  if (!books) return [];
-  const bookIds = books.map((book) => book.id);
-  return bookIds.map((bookId) => {
-    return {
-      bookId,
-    };
-  });
-}
+// export async function generateStaticParams() {
+//   const books: Book[] = await getAllBooks();
+//   if (!books) return [];
+//   const bookIds = books.map((book) => book.id);
+//   return bookIds.map((bookId) => {
+//     return {
+//       bookId,
+//     };
+//   });
+// }
 
 const ContentPage = ({ params }: { params: { bookId: string } }) => {
   // const [bookData, setBookData] = useState<Book>();
