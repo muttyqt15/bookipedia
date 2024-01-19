@@ -1,3 +1,4 @@
+import { cookieAuthValidation } from "../auth/auth.middleware"
 import { prisma } from "../db"
 import express from "express"
 
@@ -21,4 +22,8 @@ router.get("/:id", async (req, res) => {
     return res.status(200).json(user)
 })
 
+router.get("/", cookieAuthValidation, async (req, res) => {
+    res.send("Works!")
+})
 export default router
+

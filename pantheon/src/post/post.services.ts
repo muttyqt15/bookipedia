@@ -1,5 +1,5 @@
 import { Post } from "@prisma/client";
-import { create, getAll, getOne, getUserBooks, update } from "./post.repository";
+import { create, deleteAction, getAll, getOne, getUserBooks, update } from "./post.repository";
 
 export const createBook = async (data: Post) => {
   const book = await create(data);
@@ -11,6 +11,10 @@ export const getBook = async (id: string) => {
   return book;
 };
 
+export const deleteBook = async(id: string) => {
+  const deletionStatus = deleteAction(id)
+  return deletionStatus;
+}
 export const updateBook = async (id: string, content: string) => {
   const book = await update(id, content);
   return book;

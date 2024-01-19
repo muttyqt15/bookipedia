@@ -1,25 +1,31 @@
 import express from "express";
 import {
   createBook,
+  deleteBook,
   getAllBooks,
   getBook,
   getBooksByUser,
   updateBook,
 } from "./post.services";
-import { accessValidation } from "../auth/auth.middleware";
+import { cookieAuthValidation } from "../auth/auth.middleware";
 const router = express.Router();
 
 // Allows user to create a post
-router.post("/", accessValidation, async (req, res) => {
+router.post("/", cookieAuthValidation, async (req, res) => {
   const bookData = req.body;
   if (!bookData) {
     return res.status(400).json({ error: "No book data provided" });
   }
+  // if (!bookData.createdById) {
+  //   return res.status(400).json({ error: "No user Id provided" });
+  // }
+
   const post = await createBook(bookData);
   return res.status(201).json(post);
 });
 
-router.get("/:id", async (req, res) => {
+
+router.get("/:id",cookieAuthValidation,  async (req, res) => {
   const { id } = req.params;
   if (!id) {
     return res.status(400).json({ error: "No post Id provided" });
@@ -29,7 +35,8 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update content of a book
-router.patch("/:id", async (req, res) => { // Should have accessValidation, but there's some bug ?!!!
+router.patch("/:id", cookieAuthValidation, async (req, res) => {
+  // Should hav, but there's some bug ?!!!
   // There is a user Id called createdById in the post table
   const postId = req.params.id;
   if (!postId) {
@@ -53,8 +60,18 @@ router.get("/", async (req, res) => {
   return res.status(200).json(allBooks);
 });
 
+router.delete("/:id", cookieAuthValidation,  async (req, res) => {
+  const postId = req.params.id;
+  if (!postId) {
+    return res.status(400).json({ error: "No post Id provided" });
+  }
+  const deletionStatus = await deleteBook(postId);
+  if (deletionStatus) {
+    return res.status(200).json({ message: "Post deleted successfully" });
+  }
+});
 // Get users posts
-router.get("/:id", accessValidation, async (req, res) => {
+router.get("/:id", cookieAuthValidation, async (req, res) => {
   const userId = req.params.id;
   if (!userId) {
     return res.status(400).json({ error: "No user Id provided" });

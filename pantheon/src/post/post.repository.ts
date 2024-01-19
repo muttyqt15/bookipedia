@@ -19,6 +19,19 @@ export const create = async (data: Post) => {
   }
 };
 
+export const deleteAction = async(id: string) => {
+  try {
+    await prisma.post.delete({
+      where: {
+        id: id,
+      },
+    });
+    return true;
+  } catch (error) {
+    console.error(error);
+  }
+}  
+
 export const getOne = async (id: string) => {
   try {
     const post = await prisma.post.findUnique({

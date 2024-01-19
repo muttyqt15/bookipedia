@@ -2,13 +2,12 @@ import express from "express";
 import { loginUser, registerUser } from "./auth.service";
 import { LoginData, SignInData } from "./auth.interfaces";
 import jwt from "jsonwebtoken";
-import { ValidationRequest, accessValidation } from "./auth.middleware";
 const router = express.Router();
 
-router.get("/", accessValidation, (req: ValidationRequest, res) => {
-  const userData = req.userData;
-  res.send(userData);
-});
+// router.get("/", accessValidation, (req: ValidationRequest, res) => {
+//   const userData = req.userData;
+//   res.send(userData);
+// });
 
 router.post("/register", async (req, res) => {
   const userData = <SignInData>req.body; // From client
@@ -41,7 +40,7 @@ router.post("/login", async (req, res, next) => {
   try {
     const secret = process.env.JWT_SECRET!;
     const expiresIn = process.env.JWT_EXPIRES_IN!;
-    const token = jwt.sign(user, secret, { expiresIn: expiresIn });
+    const token = jwt.sign(user, secret, { expiresIn: expiresIn }); // Creates a token with the user data and secret
 
     res.cookie("token", token, {
       // Set cookie to token that is stored in browser

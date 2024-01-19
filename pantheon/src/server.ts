@@ -5,6 +5,7 @@ import morgan from "morgan";
 import cors from "cors";
 import createHttpError, { HttpError } from "http-errors";
 import isHttpError from "http-errors";
+import cookieParser from "cookie-parser";
 import authController from "./auth/auth.controller";
 import postController from "./post/post.controller";
 import userController from "./user/user.controller";
@@ -13,12 +14,15 @@ const PORT = env.PORT;
 
 app.use(morgan("dev"));
 app.use(express.json()); // Important to parse the body of the request
+app.use(cookieParser());
 app.use(
   cors({
     origin: "http://localhost:3000", // Allow requests from this origin
     credentials: true, // Enable credentials (cookies, HTTP authentication) in cross-origin requests
   })
 );
+
+
 app.use("/api/users", userController);
 app.use("/api/auth", authController);
 app.use("/api/posts", postController);
