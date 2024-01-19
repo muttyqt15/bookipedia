@@ -15,10 +15,7 @@ const PORT = env.PORT;
 app.use(morgan("dev"));
 app.use(express.json()); // Important to parse the body of the request
 app.use(cookieParser());
-app.use(
-  cors()
-);
-
+app.use(cors());
 
 app.use("/api/users", userController);
 app.use("/api/auth", authController);
