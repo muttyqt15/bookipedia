@@ -13,6 +13,7 @@ export const create = async (data: Post) => {
         image: data.image
       },
     });
+    console.log(post)
     return post;
   } catch (err) {
     console.error(err);

@@ -7,12 +7,14 @@ import {
   getBooksByUser,
   updateBook,
 } from "./post.services";
-import { cookieAuthValidation } from "../auth/auth.middleware";
 const router = express.Router();
 
+// TODO: FIX MIDDLEWARE AUTH
+
 // Allows user to create a post
-router.post("/", cookieAuthValidation, async (req, res) => {
+router.post("/", async (req, res) => { // TODO: Should be cookie validated but isnt, there's an error
   const bookData = req.body;
+  console.log('bookData', bookData, 'test')
   if (!bookData) {
     return res.status(400).json({ error: "No book data provided" });
   }
@@ -25,7 +27,7 @@ router.post("/", cookieAuthValidation, async (req, res) => {
 });
 
 
-router.get("/:id",cookieAuthValidation,  async (req, res) => {
+router.get("/:id",  async (req, res) => {
   const { id } = req.params;
   if (!id) {
     return res.status(400).json({ error: "No post Id provided" });
@@ -35,7 +37,7 @@ router.get("/:id",cookieAuthValidation,  async (req, res) => {
 });
 
 // Update content of a book
-router.patch("/:id", cookieAuthValidation, async (req, res) => {
+router.patch("/:id", async (req, res) => {
   // Should hav, but there's some bug ?!!!
   // There is a user Id called createdById in the post table
   const postId = req.params.id;
@@ -60,7 +62,7 @@ router.get("/", async (req, res) => {
   return res.status(200).json(allBooks);
 });
 
-router.delete("/:id", cookieAuthValidation,  async (req, res) => {
+router.delete("/:id",  async (req, res) => {
   const postId = req.params.id;
   if (!postId) {
     return res.status(400).json({ error: "No post Id provided" });
@@ -71,7 +73,7 @@ router.delete("/:id", cookieAuthValidation,  async (req, res) => {
   }
 });
 // Get users posts
-router.get("/:id", cookieAuthValidation, async (req, res) => {
+router.get("/:id", async (req, res) => {
   const userId = req.params.id;
   if (!userId) {
     return res.status(400).json({ error: "No user Id provided" });

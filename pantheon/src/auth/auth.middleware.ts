@@ -7,7 +7,12 @@ interface authReq extends Request {
 }
 export const cookieAuthValidation = (req: authReq, res: Response, next: NextFunction) => {
   const token = req.cookies.token; // Get cookies from request
+  if (!token) {
+    console.log(`No token provided! ${token}`)
+    console.log(`Req headers ${JSON.stringify(req.cookies, null, 2)}`)
 
+    return res.status(400).json({ message: `No token provided! ${token}` }); // If no token, send unauthorized response
+  } 
   try {
     const secret = process.env.JWT_SECRET!; 
     const user = jwt.verify(token, secret); // Verify token with secret
