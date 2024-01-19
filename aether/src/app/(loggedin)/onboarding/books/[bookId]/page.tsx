@@ -14,6 +14,7 @@ interface Book {
 
 export async function generateStaticParams() {
   const books: Book[] = await getAllBooks();
+  if (!books) return [];
   const bookIds = books.map((book) => book.id);
   return bookIds.map((bookId) => {
     return {
