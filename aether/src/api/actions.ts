@@ -1,6 +1,6 @@
 import { Book } from "@/types/posts";
 import { User } from "@/types/user";
-
+import Cookies from "js-cookie";
 export const fetchData = async (url: RequestInfo, init?: RequestInit) => {
   const response = await fetch(url, init);
   if (response.ok) {
@@ -10,6 +10,24 @@ export const fetchData = async (url: RequestInfo, init?: RequestInit) => {
   }
 };
 
+export const authorizedFetch = async (url: RequestInfo, options?: RequestInit) => {
+  const token = Cookies.get("token");
+  try {
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        ...options?.headers,
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    // Handle errors
+    console.error("Request failed:", error);
+    throw error;
+  }
+};
 export const getAuthor = async (authorId: string) => {
   const response = await fetchData(
     `http://localhost:5000/api/users/${authorId}`,
@@ -41,6 +59,13 @@ interface createBookTypes {
   createdById: string;
   content?: string;
 }
+
+export const deleteBook = async (id: string) => {
+  const response = await fetchData(`http://localhost:5000/api/posts/${id}`, {
+    method: "DELETE",
+  });
+  return response;
+};
 export const createBook = async ({
   title,
   description,
@@ -49,7 +74,7 @@ export const createBook = async ({
   const response = await fetchData("http://localhost:5000/api/posts", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      // "Authorization": `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ title, description, createdById }),
@@ -63,7 +88,7 @@ export const updateBookContent = async (content: string, bookId: string) => {
     {
       method: "PATCH",
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`, // For later authentication
+        Authorization: `Bearer ${localStorage.getItem("token")}`, // For later authentication
         "Content-Type": "application/json",
       },
       body: JSON.stringify(content),

@@ -19,9 +19,13 @@ const NavLoggedinElements = () => {
           className="hover:tracking-tighter transition-all transform duration-1000 ">
           Create
         </Link>
+        <Link
+          href="/public-books"
+          className="hover:tracking-tighter transition-all transform duration-1000 ">
+          View
+        </Link>
       </div>
       <div className="flex items-center gap-4">
-        <Link href="/login"></Link>
         <button
           onClick={handleClick}
           className="hover:tracking-widest transition-all transform duration-1000 ">

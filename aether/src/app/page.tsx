@@ -12,7 +12,7 @@ const Home = () => {
               ????
             </span>{" "}
             Are you {" "}
-            <span className="hover:text-[#B0A695] animate-ease cursor-default">
+            <span className="hover:text-red-900 animate-ease cursor-default">
               lost
             </span>
             ?

@@ -2,7 +2,7 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 import { User, UserClientData } from "@/types/user";
 import { loginUser } from "@/api/authActions";
-
+import Cookies from "js-cookie";
 interface AuthContextProps {
   isAuthenticated: boolean;
   isLoading: boolean; // New property to indicate loading state
@@ -52,8 +52,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       // Save authentication state in localStorage
       localStorage.setItem("userData", JSON.stringify(loginRes.user));
-      localStorage.setItem("token", loginRes.token);
       localStorage.setItem("isAuthenticated", "true");
+      Cookies.set("token", loginRes.token, { expires: 36000 });
 
       console.log(`Successful login! ${JSON.stringify(loginRes)}`);
     } catch (err) {
@@ -66,7 +66,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     // Clear authentication state in localStorage
     localStorage.removeItem("userData");
-    localStorage.removeItem("token");
+    localStorage.setItem("isAuthenticated", "false")
+    Cookies.remove("token");
 
     setIsAuthenticated(false);
     setUserData(null);

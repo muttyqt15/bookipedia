@@ -24,7 +24,7 @@ const Form = (p: FormProps & { className?: string } & { buttonPrompt: string }) 
   };
   return (
     <>
-      <section className={cn("max-w-72 p-4 rounded-xl text-[#722F37] bg-[#F5DEB3] font-mono shadow-[#722F37] shadow-inner", p.className)}>
+      <section className={cn("max-w-72 p-4 rounded-xl text-[#722F37] bg-[#F5DEB3] font-mono shadow-red-950 shadow-inner", p.className)}>
         <form className="flex flex-col">
           {p.fields.map((field, i) => {
             return (
