@@ -1,5 +1,5 @@
 import PostsSkeletons from "@/components/skeletons/PostsSkeletons";
-import BooksSection from "@/pages/ViewAllBooksPage";
+import BooksSection from "@/pages/BooksSection";
 
 const AllBooksPage = () => {
   return (

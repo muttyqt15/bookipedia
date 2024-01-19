@@ -10,8 +10,14 @@ export const fetchData = async (url: RequestInfo, init?: RequestInit) => {
   }
 };
 
-export const authorizedFetch = async (url: RequestInfo, options?: RequestInit) => {
+export const authorizedFetch = async (
+  url: RequestInfo,
+  options?: RequestInit
+) => {
   const token = Cookies.get("token");
+  if (!token) {
+    throw new Error("No token found");
+  }
   try {
     const response = await fetch(url, {
       ...options,
@@ -71,11 +77,13 @@ export const createBook = async ({
   description,
   createdById,
 }: createBookTypes) => {
-  const response = await fetchData("http://localhost:5000/api/posts", {
+  const response = await authorizedFetch("http://localhost:5000/api/posts", {
     method: "POST",
     headers: {
       // "Authorization": `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
+      // credentials: 'include',
+      // mode: 'cors',
     },
     body: JSON.stringify({ title, description, createdById }),
   });
@@ -83,18 +91,20 @@ export const createBook = async ({
 };
 
 export const updateBookContent = async (content: string, bookId: string) => {
-  const newContent = await fetchData(
+  const newContent = await authorizedFetch(
     `http://localhost:5000/api/posts/${bookId}`,
     {
       method: "PATCH",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`, // For later authentication
+        // Authorization: `Bearer ${localStorage.getItem("token")}`, // For later authentication
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(content),
+      body: JSON.stringify({content}),
     }
   );
-  return newContent;
+  const jsonContent = await newContent.json();
+  console.log(jsonContent, ":", newContent);
+  return jsonContent;
 };
 export const getUniqueBook = async (bookId: string) => {
   const book = await fetchData(`http://localhost:5000/api/posts/${bookId}`, {

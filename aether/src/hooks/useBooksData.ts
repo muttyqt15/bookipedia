@@ -1,5 +1,5 @@
 "use client"
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllBooks, getAuthorWithBooks } from "@/api/actions";
 import { Book } from "@/types/posts";
 import { User } from "@/types/user";

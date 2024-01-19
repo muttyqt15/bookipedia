@@ -5,12 +5,17 @@ import Wrapper from "@/components/Wrapper";
 import BookForm from "@/components/forms/BookForm";
 import { useAuthContext } from "@/context/useAuthContext";
 import { Book } from "@/types/posts";
+import { User } from "@/types/user";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // Optimize nanti
 const PersonalBookPage = () => {
-  const userJSON = localStorage.getItem("userData");
-  const userData = userJSON ? JSON.parse(userJSON) : null;
+  const [userData, setUser] = useState<User | null>(null)
+  useEffect(() => {
+    const userJSON = localStorage.getItem("userData");
+    const user = userJSON ? JSON.parse(userJSON) : null;
+    setUser(user)
+  }, []);
   const router = useRouter();
   const handleCreate = async (data: Book) => {
     if (userData) {
@@ -20,17 +25,16 @@ const PersonalBookPage = () => {
         description,
         createdById: userData.id,
       });
-      router.push(`./books/${response.id}`);
+      // 
+      const res = await response.json() // MERESAHKANN!!!
+      router.push(`./books/${res.id}`);
     } else {
       console.error("Unauthorized!");
     }
   };
   return (
     <Wrapper className="">
-      <section className="flex flex-col justify-center w-2/3 items-center h-full">
-        <div className="w-56 h-72 border bg-gray-900 rounded-xl">
-          {/* For book profile image */}
-        </div>
+      <section className="flex flex-col justify-center items-center h-full">
         <BookForm onSubmit={handleCreate} />
       </section>
     </Wrapper>

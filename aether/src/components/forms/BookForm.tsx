@@ -1,5 +1,4 @@
-// components/BookForm.js
-
+"use client"
 import React, { useState } from 'react';
 import { cn } from "../lib/utils";
 import { BookFormProps } from "@/types/form";
@@ -25,8 +24,8 @@ const BookForm = (p: BookFormProps & { className?: string }) => {
   };
 
   return (
-    <section className={cn("max-w-72 p-4 rounded-xl text-[#722F37] bg-[#F5DEB3] shadow-[#722F37] shadow-inner milonga tracking-wide", p.className)}>
-      <form className="flex flex-col gap-2">
+    <section className={cn("max-w-96 p-4 rounded-xl text-[#722F37] bg-[#F5DEB3] shadow-[#722F37] shadow-inner milonga tracking-wide", p.className)}>
+      <form className="flex flex-col gap-2 w-80">
         <FormField
           type="text"
           name="Title"

@@ -12,6 +12,7 @@ const StoryArea = ({bookId}: {bookId: string}) => {
       e.currentTarget.elements.namedItem("content") as HTMLTextAreaElement
     ).value;
     const patchData = updateBookContent(contentValue, bookId);
+    console.log(patchData)
     router.push(`/public-books`)
   };
 
