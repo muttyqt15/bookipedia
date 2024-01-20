@@ -43,7 +43,7 @@ const Card = ({ id, title, description, image, author }: CardProps) => {
   return (
     <button
       onClick={handleClick}
-      className="text-[#3E3232] hover:scale-95 relative flex flex-col w-96 h-96 md:w-64 md:h-96 bg-[#C19A6B] border rounded-xl border-none text-2xl m-4 p-2 hover:shadow-md transition-all">
+      className="text-[#3E3232] hover:scale-95 relative flex flex-col w-80 h-96 md:w-72 md:h-96 bg-[#C19A6B] border rounded-xl border-none text-2xl m-4 p-2 hover:shadow-md transition-all">
       <section className="relative h-2/3 w-full border rounded-xl border-none">
         <Image
           src={image!}
