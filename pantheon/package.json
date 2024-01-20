@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
+    "postinstall": "prisma generate",
     "start": "nodemon src/server.ts",
     "lint": "eslint . --ext .ts"
   },
