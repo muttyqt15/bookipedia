@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "prisma generate",
     "start": "nodemon src/server.ts",
-    "deploy": "npm run prisma generate && npm prisma db push",
+    "deploy": "prisma generate && prisma db push",
     "lint": "eslint . --ext .ts"
   },
   "keywords": [],
