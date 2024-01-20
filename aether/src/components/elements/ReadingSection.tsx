@@ -15,10 +15,10 @@ const ReadingSection = ({ id }: { id: string }) => {
   return (
     <div className="flex flex-col justify-center items-center w-full min-h-screen">
       {book && (
-        <div className="p-4 border rounded-xl min-w-[400px] lg:w-[800px] min-h-[500px] bg-white flex flex-col items-center">
+        <div className="p-4 border rounded-xl min-w-[320px] lg:w-[800px] min-h-[500px] bg-white flex flex-col items-center">
           <h1 className="text-xl titan">{book.title}</h1>
           <p className="">{book.description}</p>
-          <div className="min-w-[350px] lg:w-[700px] bg-gray-300 h-fit min-h-[500px] rounded-xl shadow-inner shadow-slate-700 p-4">
+          <div className="min-w-[300px] lg:w-[700px] bg-gray-300 h-fit min-h-[500px] rounded-xl shadow-inner shadow-slate-700 p-4">
             <p className="text-sm">{book.content}</p>
           </div>
         </div>
