@@ -18,7 +18,8 @@ const Card = ({ id, title, description, image, author }: CardProps) => {
   useEffect(() => {
     const userData = localStorage.getItem("userData");
     const userJSON = userData ? JSON.parse(userData) : null;
-    if (userJSON.id === author.id) {
+    console.log(userJSON)
+    if (userJSON?.id === author.id) { 
       setUserOwns(true);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

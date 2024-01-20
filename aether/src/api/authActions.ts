@@ -2,7 +2,7 @@ import { UserClientData } from "@/types/user";
 import { fetchData } from "./actions";
 
 export const loginUser = async (userData: UserClientData) => {
-  const userInfo = await fetchData("http://localhost:5000/api/auth/login", {
+  const userInfo = await fetchData(`${process.env.NEXT_PUBLIC_BE_URL}/api/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +13,7 @@ export const loginUser = async (userData: UserClientData) => {
 };
 
 export const signupUser = async (userData: UserClientData) => {
-  const response = await fetchData("http://localhost:5000/api/auth/register", {
+  const response = await fetchData(`${process.env.NEXT_PUBLIC_BE_URL}/api/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

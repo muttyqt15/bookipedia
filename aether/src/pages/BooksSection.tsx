@@ -5,7 +5,6 @@ import useBooksData from "../hooks/useBooksData";
 import { Book } from "@/types/posts";
 
 const BooksSection = () => {
-  const [books, setBooks] = useState<Book[]>([]);
   const booksData = useBooksData();
   
   return (
