@@ -6,14 +6,21 @@ import { Pencil, TrashIcon } from "lucide-react";
 import { deleteBook } from "@/api/actions";
 import { useRouter } from "next/navigation";
 import { User } from "@/types/user";
+interface deleteProp {
+  e: React.MouseEvent<HTMLElement>;
+  id: string
+}
 interface CardProps {
   id: string;
   title: string;
   description: string;
   image?: string;
   author: User;
+  books?: any;
+  setBooks?: any;
+  // handleDelete: ({e, id}: deleteProp) => void; 
 }
-const Card = ({ id, title, description, image, author }: CardProps) => {
+const Card = ({ id, title, description, image, author, books, setBooks }: CardProps) => {
   const [userOwns, setUserOwns] = React.useState(false);
   useEffect(() => {
     const userData = localStorage.getItem("userData");
@@ -28,6 +35,7 @@ const Card = ({ id, title, description, image, author }: CardProps) => {
   const handleDelete = async (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     await deleteBook(id);
+    setBooks((prev: any) => prev.filter((book: any) => book.id !== id))
     console.log("deleted");
   };
 
